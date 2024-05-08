@@ -3,10 +3,11 @@
 
 {% block content %}
 
-    <form action="/" method="post" class="form">
+    <form action="{% url 'login' %}" method="post" class="form">
+        {% csrf_token %}
         {% bootstrap_form form %}
         {% buttons %}
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="submit" class="btn btn-primary">Login</button>
         {% endbuttons %}
     </form>
 
