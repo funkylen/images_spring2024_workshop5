@@ -23,7 +23,7 @@ def login(request):
     return render(request, 'login.html', {'form': form})
 
 
-@login_required
+@login_required(login_url="login")
 def index(request):
     form = ImageForm
     return render(request, 'index.html', {'form': form})
