@@ -1,6 +1,8 @@
 from django.contrib import auth
 from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_protect
 
 from .forms import ImageForm, LoginForm
 
@@ -20,7 +22,8 @@ def login(request):
 
     return render(request, 'login.html', {'form': form})
 
-# Create your views here.
+
+@login_required
 def index(request):
     form = ImageForm
     return render(request, 'index.html', {'form': form})
