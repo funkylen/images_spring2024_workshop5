@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect
 
-from .forms import ImageForm, LoginForm
+from .forms import LoginForm, ImageForm
 
 
 @csrf_protect
@@ -24,6 +24,7 @@ def login(request):
 
 
 @login_required(login_url="login")
+@csrf_protect
 def index(request):
     form = ImageForm
     return render(request, 'index.html', {'form': form})
