@@ -3,12 +3,28 @@
 
 {% block content %}
 
-    <form action="/" method="post" class="form">
+    <form action="{% url 'index' %}" method="post" class="form" enctype="multipart/form-data">
         {% bootstrap_form form %}
         {% csrf_token %}
         {% buttons %}
             <button type="submit" class="btn btn-primary">Create</button>
         {% endbuttons %}
     </form>
+
+    <section class="mt-5 row g-3">
+        {% for image in images %}
+            <div class="col-12 col-lg-4">
+                <div class="card" style="width: 18rem;" data-image-id="{{ image.id }}">
+                    <img src="{{ image.file.url }}" class="card-img-top" alt="Image">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ image.name }}</h5>
+                        <p class="card-text">Created At: {{ image.created_at }}</p>
+                        <p class="card-text">Likes: <span class="like-counter">{{ image.likes_count }}</span></p>
+                        <button type="submit" class="btn btn-outline-primary like-button">Like</button>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </section>
 
 {% endblock %}
